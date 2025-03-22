@@ -1,42 +1,73 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.app {
+	width: 100vw;
+	height: 100vh;
+	font-family: "Poppins", sans-serif;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.configurator {
+	position: fixed;
+	right: 24px;
+	width: 320px;
+	bottom: 25vh;
+	color: white;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.configurator_section_title {
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
-.card {
-  padding: 2em;
+.configurator_section_values {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	margin-top: 24px;
+	flex-wrap: wrap;
 }
 
-.read-the-docs {
-  color: #888;
+.item_label {
+	font-size: 12px;
+	color: #acacac;
+	transition: 0.4s color;
+}
+
+.item_dot {
+	width: 32px;
+	height: 32px;
+	border-radius: 100%;
+	border: 2px solid #999999;
+}
+
+.item.item_active .item_dot {
+	border: solid 2px white;
+}
+
+.item {
+	transition: 0.4s opacity;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.item:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+.item.item_active .item_label {
+	color: white;
 }
