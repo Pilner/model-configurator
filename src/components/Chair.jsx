@@ -31,9 +31,9 @@ export function Chair(props) {
 			THREE.RepeatWrapping;
 
 	const fabricTextureProps = useTexture({
-		normalMap: "public/textures/fabric/Fabric_Knitted_006_normal.jpg",
-		roughnessMap: "public/textures/fabric/Fabric_Knitted_006_roughness.jpg",
-		aoMap: "public/textures/fabric/Fabric_Knitted_006_ambientOcclusion.jpg",
+		normalMap: "./textures/fabric/Fabric_Knitted_006_normal.jpg",
+		roughnessMap: "./textures/fabric/Fabric_Knitted_006_roughness.jpg",
+		aoMap: "./textures/fabric/Fabric_Knitted_006_ambientOcclusion.jpg",
 	});
 
 	fabricTextureProps.normalMap.repeat.set(3, 3);
