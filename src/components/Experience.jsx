@@ -25,7 +25,10 @@ export default function Experience() {
 					<Chair />
 				</Suspense>
 			</Stage>
-			<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1.5}>
+			<mesh
+				rotation={[-Math.PI / 2, 0, 0]}
+				// position-y={-1.5}
+			>
 				<planeGeometry args={[170, 170]} />
 				<MeshReflectorMaterial
 					blur={[100, 100]}
