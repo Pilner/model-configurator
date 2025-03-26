@@ -17,7 +17,7 @@ export default function Configurator() {
 	} = useCustomization();
 
 	return (
-		<div className="fixed right-8 w-[320px] top-1/2 -translate-y-1/2 text-white p-[16px] flex flex-col gap-[32px]">
+		<div className="backdrop-blur-sm fixed bottom-4 md:bottom-auto left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto w-full top-auto md:right-0 md:w-2/7 lg:w-1/4 md:top-1/2 md:-translate-y-1/2 text-white p-[16px] border-t border-l-0 md:border-l md:border-t-0 border-[#999999] flex overflow-y-scroll h-1/5 md:h-full flex-col gap-[32px]">
 			<div>
 				<div className="font-bold uppercase">Chair Material</div>
 				<div className="flex items-center gap-[24px] mt-[24px] flex-wrap">
