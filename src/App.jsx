@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
 	return (
 		<CustomizationProvider>
-			<div className="app">
+			<div className="font-main h-screen w-screen no-select">
 				<Canvas>
 					<color attach="background" args={["#213547"]} />
 					<fog attach="fog" args={["#213547", 10, 20]} />
