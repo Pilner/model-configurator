@@ -17,22 +17,19 @@ export function Umbrella(props) {
 	const { nodes, materials } = useGLTF("models/umbrella/scene.gltf");
 
 	const fabricTextureProps = useTexture({
-		normalMap: "public/textures/fabric/Fabric_polyester_001_normal.jpg",
-		roughnessMap:
-			"public/textures/fabric/Fabric_polyester_001_roughness.jpg",
-		heightMap: "public/textures/fabric/Fabric_polyester_001_height.png",
-		aoMap: "public/textures/fabric/Fabric_polyester_001_ambientOcclusion.jpg",
+		normalMap: "/textures/fabric/Fabric_polyester_001_normal.jpg",
+		roughnessMap: "/textures/fabric/Fabric_polyester_001_roughness.jpg",
+		heightMap: "/textures/fabric/Fabric_polyester_001_height.png",
+		aoMap: "/textures/fabric/Fabric_polyester_001_ambientOcclusion.jpg",
 	});
 
 	const steelTextureProps = useTexture({
-		normalMap: "public/textures/steel/Metal_Steel_Brushed_001_normal.jpg",
-		roughnessMap:
-			"public/textures/steel/Metal_Steel_Brushed_001_roughness.jpg",
-		heightMap: "public/textures/steel/Metal_Steel_Brushed_001_height.png",
-		aoMap: "public/textures/steel/Metal_Steel_Brushed_001_ambientOcclusion.jpg",
-		metalnessMap:
-			"public/textures/steel/Metal_Steel_Brushed_001_metallic.jpg",
-		diffuseMap: "public/textures/steel/Metal_Steel_Brushed_001_diffuse.jpg",
+		normalMap: "/textures/steel/Metal_Steel_Brushed_001_normal.jpg",
+		roughnessMap: "/textures/steel/Metal_Steel_Brushed_001_roughness.jpg",
+		heightMap: "/textures/steel/Metal_Steel_Brushed_001_height.png",
+		aoMap: "/textures/steel/Metal_Steel_Brushed_001_ambientOcclusion.jpg",
+		metalnessMap: "/textures/steel/Metal_Steel_Brushed_001_metallic.jpg",
+		diffuseMap: "/textures/steel/Metal_Steel_Brushed_001_diffuse.jpg",
 	});
 
 	return (
