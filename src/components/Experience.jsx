@@ -5,7 +5,8 @@ import {
 } from "@react-three/drei";
 
 import { Suspense } from "react";
-import { Chair } from "./Chair";
+// import { Chair } from "./Chair";
+import { Umbrella } from "./Umbrella";
 
 export default function Experience() {
 	return (
@@ -13,7 +14,7 @@ export default function Experience() {
 			speed={1.5}
 			global
 			zoom={0.7}
-			polar={[-0.1, Math.PI / 4, 0]}
+			polar={[0.1, Math.PI / 4, 0]}
 		>
 			<Stage
 				environment={"city"}
@@ -22,7 +23,8 @@ export default function Experience() {
 				adjustCamera={false}
 			>
 				<Suspense fallback={null}>
-					<Chair />
+					{/* <Chair /> */}
+					<Umbrella position={[3, 0, 1]} />
 				</Suspense>
 			</Stage>
 			<mesh
