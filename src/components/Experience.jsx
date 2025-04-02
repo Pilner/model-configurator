@@ -5,7 +5,6 @@ import {
 } from "@react-three/drei";
 
 import { Suspense } from "react";
-// import { Chair } from "./Chair";
 import { Umbrella } from "./Umbrella";
 
 export default function Experience() {
@@ -13,24 +12,23 @@ export default function Experience() {
 		<PresentationControls
 			speed={1.5}
 			global
-			zoom={0.7}
-			polar={[0.1, Math.PI / 4, 0]}
+			zoom={3}
+			// polar={[0.1, Math.PI / 4, 0]}
 		>
 			<Stage
 				environment={"city"}
 				intensity={0.6}
 				contactShadow={false}
-				adjustCamera={false}
+				// adjustCamera={false}
 			>
 				<Suspense fallback={null}>
-					{/* <Chair /> */}
-					<Umbrella position={[3, 0, 1]} />
+					<Umbrella
+						position={[3, 1.1, 1]}
+						// position={[3, -1.4, 0]}
+					/>
 				</Suspense>
 			</Stage>
-			<mesh
-				rotation={[-Math.PI / 2, 0, 0]}
-				// position-y={-1.5}
-			>
+			<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1.5}>
 				<planeGeometry args={[170, 170]} />
 				<MeshReflectorMaterial
 					blur={[100, 100]}
