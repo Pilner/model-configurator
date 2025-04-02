@@ -23,8 +23,8 @@ export default function Experience() {
 			>
 				<Suspense fallback={null}>
 					<Umbrella
-						position={[3, 1.1, 1]}
-						// position={[3, -1.4, 0]}
+					// position={[3, 1.1, 1]}
+					// position={[3, -1.4, 0]}
 					/>
 				</Suspense>
 			</Stage>
