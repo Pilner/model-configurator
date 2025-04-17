@@ -13,7 +13,7 @@ export default function Experience() {
 			speed={1.5}
 			global
 			zoom={3}
-			// polar={[0.1, Math.PI / 4, 0]}
+			polar={[0.1, Math.PI / 4, 0]}
 		>
 			<Stage
 				environment={"city"}
@@ -22,10 +22,7 @@ export default function Experience() {
 				// adjustCamera={false}
 			>
 				<Suspense fallback={null}>
-					<Umbrella
-					// position={[3, 1.1, 1]}
-					// position={[3, -1.4, 0]}
-					/>
+					<Umbrella />
 				</Suspense>
 			</Stage>
 			<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1.5}>
