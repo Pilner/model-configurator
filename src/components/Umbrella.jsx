@@ -5,48 +5,20 @@ Command: npx gltfjsx@6.5.3 ../../public/models/umbrella.glb
 
 import React from "react";
 import * as THREE from "three";
-import { useGLTF, useTexture } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { useCustomization } from "../contexts/Customization";
+import useFabricTextures from "../hooks/useFabricTextures";
+import useSteelTextures from "../hooks/useSteelTextures";
+import usePlasticTextures from "../hooks/usePlasticTextures";
 
 export function Umbrella(props) {
 	const { nodes, materials } = useGLTF("models/umbrella.glb");
 	const { packageType, umbrellaShape, fabricColor, steelColor } =
 		useCustomization();
 
-	const fabricTextureProps = useTexture({
-		normalMap: "/textures/fabric/Fabric_Jute_001_normal.png",
-		roughnessMap: "/textures/fabric/Fabric_Jute_001_roughness.png",
-		heightMap: "/textures/fabric/Fabric_Jute_001_height.png",
-		aoMap: "/textures/fabric/Fabric_Jute_001_ambientOcclusion.png",
-	});
-
-	const steelTextureProps = useTexture({
-		normalMap: "/textures/steel/Metal_Steel_Brushed_001_normal.jpg",
-		roughnessMap: "/textures/steel/Metal_Steel_Brushed_001_roughness.jpg",
-		heightMap: "/textures/steel/Metal_Steel_Brushed_001_height.png",
-		aoMap: "/textures/steel/Metal_Steel_Brushed_001_ambientOcclusion.jpg",
-		metalnessMap: "/textures/steel/Metal_Steel_Brushed_001_metallic.jpg",
-		diffuseMap: "/textures/steel/Metal_Steel_Brushed_001_diffuse.jpg",
-	});
-
-	const plasticTextureProps = useTexture({
-		roughnessMap: "/textures/plastic/Plastic_001_ROUGH.jpg",
-	});
-
-	fabricTextureProps.normalMap.repeat.set(2, 2);
-	fabricTextureProps.roughnessMap.repeat.set(2, 2);
-	fabricTextureProps.heightMap.repeat.set(2, 2);
-	fabricTextureProps.aoMap.repeat.set(2, 2);
-
-	fabricTextureProps.normalMap.wrapS =
-		fabricTextureProps.normalMap.wrapT =
-		fabricTextureProps.roughnessMap.wrapS =
-		fabricTextureProps.roughnessMap.wrapT =
-		fabricTextureProps.heightMap.wrapS =
-		fabricTextureProps.heightMap.wrapT =
-		fabricTextureProps.aoMap.wrapS =
-		fabricTextureProps.aoMap.wrapT =
-			THREE.RepeatWrapping;
+	const fabricTextureProps = useFabricTextures();
+	const steelTextureProps = useSteelTextures();
+	const plasticTextureProps = usePlasticTextures();
 
 	return (
 		<group {...props} dispose={null}>
