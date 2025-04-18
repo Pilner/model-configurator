@@ -22,10 +22,7 @@ export default function Experience() {
 				// adjustCamera={false}
 			>
 				<Suspense fallback={null}>
-					<Umbrella
-					// position={[3, 1.1, 1]}
-					// position={[3, -1.4, 0]}
-					/>
+					<Umbrella />
 				</Suspense>
 			</Stage>
 			<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1.5}>

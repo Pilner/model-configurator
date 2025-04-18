@@ -10,14 +10,14 @@ import { useCustomization } from "../contexts/Customization";
 
 export function Umbrella(props) {
 	const { nodes, materials } = useGLTF("models/umbrella.glb");
-
-	const { umbrellaShape, fabricColor, steelColor } = useCustomization();
+	const { packageType, umbrellaShape, fabricColor, steelColor } =
+		useCustomization();
 
 	const fabricTextureProps = useTexture({
-		normalMap: "/textures/fabric/Fabric_polyester_001_normal.jpg",
-		roughnessMap: "/textures/fabric/Fabric_polyester_001_roughness.jpg",
-		heightMap: "/textures/fabric/Fabric_polyester_001_height.png",
-		aoMap: "/textures/fabric/Fabric_polyester_001_ambientOcclusion.jpg",
+		normalMap: "/textures/fabric/Fabric_Jute_001_normal.png",
+		roughnessMap: "/textures/fabric/Fabric_Jute_001_roughness.png",
+		heightMap: "/textures/fabric/Fabric_Jute_001_height.png",
+		aoMap: "/textures/fabric/Fabric_Jute_001_ambientOcclusion.png",
 	});
 
 	const steelTextureProps = useTexture({
@@ -27,6 +27,10 @@ export function Umbrella(props) {
 		aoMap: "/textures/steel/Metal_Steel_Brushed_001_ambientOcclusion.jpg",
 		metalnessMap: "/textures/steel/Metal_Steel_Brushed_001_metallic.jpg",
 		diffuseMap: "/textures/steel/Metal_Steel_Brushed_001_diffuse.jpg",
+	});
+
+	const plasticTextureProps = useTexture({
+		roughnessMap: "/textures/plastic/Plastic_001_ROUGH.jpg",
 	});
 
 	fabricTextureProps.normalMap.repeat.set(2, 2);
@@ -48,37 +52,38 @@ export function Umbrella(props) {
 		<group {...props} dispose={null}>
 			{/* Canopy */}
 			<mesh
-				geometry={nodes.Square_CANOPY.geometry}
-				// material={materials["Material.001"]}
-				position={[0, 3.429, 0]}
-				rotation={[0, Math.PI / 4, 0]}
-				scale={[0.685, 1, 1]}
 				visible={umbrellaShape.name === "Square"}
-			>
-				<meshStandardMaterial
-					{...fabricTextureProps}
-					color={fabricColor.color}
-				/>
-			</mesh>
-			<mesh
-				geometry={nodes.Rectangular_CANOPY.geometry}
-				// material={materials["Material.001"]}
-				position={[0, 3.429, 0]}
-				visible={umbrellaShape.name === "Rectangle"}
-			>
-				<meshStandardMaterial
-					{...fabricTextureProps}
-					color={fabricColor.color}
-				/>
-			</mesh>
-			<mesh
-				geometry={nodes.Truncated_CANOPY.geometry}
+				geometry={nodes.Square_Canopy.geometry}
 				// material={materials.Material}
-				position={[0, 3.441, 0]}
-				scale={2.298}
-				visible={umbrellaShape.name === "Truncated Square"}
+				position={[0, 3.435, 0]}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
+					{...fabricTextureProps}
+					color={fabricColor.color}
+				/>
+			</mesh>
+			<mesh
+				visible={umbrellaShape.name === "Rectangle"}
+				geometry={nodes.Rectangular_Canopy.geometry}
+				// material={materials["Material.001"]}
+				position={[0, 3.472, 0]}
+			>
+				<meshStandardMaterial
+					side={THREE.DoubleSide}
+					{...fabricTextureProps}
+					color={fabricColor.color}
+				/>
+			</mesh>
+			<mesh
+				visible={umbrellaShape.name === "Truncated Square"}
+				geometry={nodes.Truncated_Canopy.geometry}
+				// material={materials["Material.005"]}
+				position={[0, 2.36, 0]}
+				scale={[0.115, 1, 0.115]}
+			>
+				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...fabricTextureProps}
 					color={fabricColor.color}
 				/>
@@ -86,36 +91,48 @@ export function Umbrella(props) {
 
 			{/* Gutter */}
 			<mesh
+				visible={
+					umbrellaShape.name === "Square" &&
+					packageType.name !== "Package A"
+				}
 				geometry={nodes.Square_Gutter.geometry}
-				// material={nodes.Square_Gutter.material}
+				// material={materials.Material}
 				position={[0, 2.383, 0]}
-				rotation={[0, Math.PI / 4, 0]}
+				rotation={[0, Math.PI / 2, 0]}
 				scale={[0.685, 1, 1]}
-				visible={umbrellaShape.name === "Square"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 			<mesh
+				visible={
+					umbrellaShape.name === "Rectangle" &&
+					packageType.name !== "Package A"
+				}
 				geometry={nodes.Rectangular_Gutter.geometry}
-				// material={nodes.Rectangular_Gutter.material}
+				// material={materials.Material}
 				position={[-2.337, 3.429, -1.6]}
-				visible={umbrellaShape.name === "Rectangle"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 			<mesh
+				visible={
+					umbrellaShape.name === "Truncated Square" &&
+					packageType.name !== "Package A"
+				}
 				geometry={nodes.Truncated_GUTTER.geometry}
-				// material={nodes.Truncated_GUTTER.material}
+				// material={materials.Material}
 				scale={2.298}
-				visible={umbrellaShape.name === "Truncated Square"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
@@ -123,10 +140,10 @@ export function Umbrella(props) {
 
 			{/* Center Post */}
 			<mesh
-				geometry={nodes.Square_Center_Post.geometry}
-				// material={nodes.Square_Center_Post.material}
-				rotation={[0, Math.PI / 4, -0.172]}
 				visible={umbrellaShape.name === "Square"}
+				geometry={nodes.Square_Center_Post.geometry}
+				// material={materials.Material}
+				rotation={[-0.172, 1.571, 0]}
 			>
 				<meshStandardMaterial
 					{...steelTextureProps}
@@ -134,21 +151,21 @@ export function Umbrella(props) {
 				/>
 			</mesh>
 			<mesh
-				geometry={nodes.Rectangular_Center_Post.geometry}
-				// material={nodes.Rectangular_Center_Post.material}
-				rotation={[0, 0, -0.172]}
-				visible={umbrellaShape.name === "Rectangle"}
-			>
-				<meshStandardMaterial
-					{...steelTextureProps}
-					color={steelColor.color}
-				/>
-			</mesh>
-			<mesh
-				geometry={nodes.Truncated_Center_Post.geometry}
-				// material={nodes.Truncated_Center_Post.material}
-				rotation={[0, Math.PI / 4, -0.172]}
 				visible={umbrellaShape.name === "Truncated Square"}
+				geometry={nodes.Truncated_Center_Post.geometry}
+				// material={materials.Material}
+				rotation={[0, Math.PI / 4, -0.172]}
+			>
+				<meshStandardMaterial
+					{...steelTextureProps}
+					color={steelColor.color}
+				/>
+			</mesh>
+			<mesh
+				visible={umbrellaShape.name === "Rectangle"}
+				geometry={nodes.Rectangular_Center_Post.geometry}
+				// material={materials.Material}
+				rotation={[0, 0, -0.172]}
 			>
 				<meshStandardMaterial
 					{...steelTextureProps}
@@ -158,37 +175,40 @@ export function Umbrella(props) {
 
 			{/* Frame */}
 			<mesh
-				geometry={nodes.Square_Frame.geometry}
-				// material={nodes.Square_Frame.material}
-				position={[0, 0, -0.004]}
-				rotation={[0, 0.971, -0.172]}
 				visible={umbrellaShape.name === "Square"}
+				geometry={nodes.Square_Frame.geometry}
+				// material={materials.Material}
+				position={[-0.003, 0, -0.003]}
+				rotation={[-Math.PI, 1.385, 2.969]}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 			<mesh
+				visible={umbrellaShape.name === "Rectangle"}
 				geometry={nodes.Rectangular_Frame.geometry}
-				// material={nodes.Rectangular_Frame.material}
+				// material={materials.Material}
 				position={[1.363, 2.548, 0]}
 				rotation={[0, 0, -0.172]}
-				visible={umbrellaShape.name === "Rectangle"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 			<mesh
+				visible={umbrellaShape.name === "Truncated Square"}
 				geometry={nodes.Truncated_Frame.geometry}
-				// material={nodes.Truncated_Frame.material}
+				// material={materials.Material}
 				position={[0, 0, -0.004]}
 				rotation={[0, 0.971, -0.172]}
-				visible={umbrellaShape.name === "Truncated Square"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
@@ -196,61 +216,124 @@ export function Umbrella(props) {
 
 			{/* Wind Columns */}
 			<mesh
+				visible={
+					umbrellaShape.name === "Square" &&
+					packageType.name !== "Package A"
+				}
 				geometry={nodes.Square_Columns.geometry}
-				// material={nodes.Square_Columns.material}
+				// material={materials.Material}
 				position={[0, 1.18, 0]}
-				rotation={[0, Math.PI / 4, 0]}
+				rotation={[0, Math.PI / 2, 0]}
 				scale={[0.684, 1, 1.001]}
-				visible={umbrellaShape.name === "Square"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 			<mesh
+				visible={
+					umbrellaShape.name === "Rectangle" &&
+					packageType.name !== "Package A"
+				}
 				geometry={nodes.Rectangular_Columns.geometry}
-				// material={nodes.Rectangular_Columns.material}
+				// material={materials.Material}
 				position={[2.373, 2.36, 1.614]}
-				visible={umbrellaShape.name === "Rectangle"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 			<mesh
+				visible={
+					umbrellaShape.name === "Truncated Square" &&
+					packageType.name !== "Package A"
+				}
 				geometry={nodes.Truncated_Columns.geometry}
-				// material={nodes.Truncated_Columns.material}
+				// material={materials.Material}
 				position={[0, 1.18, 0]}
 				rotation={[0, Math.PI / 4, 0]}
 				scale={[0.684, 1, 1.001]}
-				visible={umbrellaShape.name === "Truncated Square"}
 			>
 				<meshStandardMaterial
+					side={THREE.DoubleSide}
 					{...steelTextureProps}
 					color={steelColor.color}
 				/>
 			</mesh>
 
+			{/* Cover */}
+			<mesh
+				visible={
+					umbrellaShape.name === "Square" &&
+					packageType.name === "Package C"
+				}
+				geometry={nodes.Square_Cover.geometry}
+				// material={materials.Material}
+			>
+				<meshStandardMaterial
+					side={THREE.DoubleSide}
+					{...plasticTextureProps}
+					color={"#DCF0EF"}
+					transparent
+					opacity={0.25}
+				/>
+			</mesh>
+			<mesh
+				visible={
+					umbrellaShape.name === "Rectangle" &&
+					packageType.name === "Package C"
+				}
+				geometry={nodes.Rectangular_Cover.geometry}
+				// material={materials.Material}
+			>
+				<meshStandardMaterial
+					side={THREE.DoubleSide}
+					{...plasticTextureProps}
+					color={"#DCF0EF"}
+					transparent
+					opacity={0.25}
+				/>
+			</mesh>
+			<mesh
+				visible={
+					umbrellaShape.name === "Truncated Square" &&
+					packageType.name === "Package C"
+				}
+				geometry={nodes.Truncated_Cover.geometry}
+				// material={materials.Material}
+				position={[-1, 0, 3.408]}
+			>
+				<meshStandardMaterial
+					side={THREE.DoubleSide}
+					{...plasticTextureProps}
+					color={"#DCF0EF"}
+					transparent
+					opacity={0.25}
+				/>
+			</mesh>
+
 			{/* Heater */}
 			<mesh
+				visible={umbrellaShape.name === "Square"}
 				geometry={nodes.Square_Heater.geometry}
 				// material={nodes.Square_Heater.material}
-				rotation={[0, 0.627, -0.172]}
-				visible={umbrellaShape.name === "Square"}
+				rotation={[0, 1.412, -0.172]}
 			/>
 			<mesh
+				visible={umbrellaShape.name === "Rectangle"}
 				geometry={nodes.Rectangular_Heater.geometry}
 				// material={nodes.Rectangular_Heater.material}
 				rotation={[0, -1.195, -0.172]}
-				visible={umbrellaShape.name === "Rectangle"}
 			/>
 			<mesh
+				visible={umbrellaShape.name === "Truncated Square"}
 				geometry={nodes.Truncated_Heater.geometry}
 				// material={nodes.Truncated_Heater.material}
 				rotation={[0, 0.627, -0.172]}
-				visible={umbrellaShape.name === "Truncated Square"}
 			/>
 		</group>
 	);
