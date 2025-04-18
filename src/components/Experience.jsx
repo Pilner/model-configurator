@@ -1,31 +1,31 @@
-import {
-	MeshReflectorMaterial,
-	PresentationControls,
-	Stage,
-} from "@react-three/drei";
+import { MeshReflectorMaterial, OrbitControls, Stage } from "@react-three/drei";
 
 import { Suspense } from "react";
 import { Umbrella } from "./Umbrella";
 
 export default function Experience() {
 	return (
-		<PresentationControls
-			speed={1.5}
-			global
-			zoom={3}
-			// polar={[0.1, Math.PI / 4, 0]}
-		>
+		<>
+			<OrbitControls
+				autoRotate={true}
+				autoRotateSpeed={2}
+				maxPolarAngle={Math.PI / 1.75}
+				minDistance={3}
+				target={[0, 2, 0]}
+				position={[0, 2, 5]}
+			/>
 			<Stage
 				environment={"city"}
 				intensity={0.6}
 				contactShadow={false}
-				// adjustCamera={false}
+				adjustCamera={false}
+				shadows={false}
 			>
 				<Suspense fallback={null}>
 					<Umbrella />
 				</Suspense>
 			</Stage>
-			<mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-1.5}>
+			<mesh rotation={[-Math.PI / 2, 0, 0]}>
 				<planeGeometry args={[170, 170]} />
 				<MeshReflectorMaterial
 					blur={[100, 100]}
@@ -40,6 +40,6 @@ export default function Experience() {
 					metalness={0.5}
 				/>
 			</mesh>
-		</PresentationControls>
+		</>
 	);
 }
