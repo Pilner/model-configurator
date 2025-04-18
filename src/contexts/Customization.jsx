@@ -1,9 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import { umbrellaShapes, fabricColors, steelColors } from "../data";
+import { packages, umbrellaShapes, fabricColors, steelColors } from "../data";
 
 const CustomizationContext = createContext({});
 
 export function CustomizationProvider(props) {
+	const [packageType, setPackageType] = useState(packages[0]);
 	const [umbrellaShape, setUmbrellaShape] = useState(umbrellaShapes[0]);
 	const [fabricColor, setFabricColor] = useState(fabricColors[0]);
 	const [steelColor, setSteelColor] = useState(steelColors[0]);
@@ -11,6 +12,8 @@ export function CustomizationProvider(props) {
 	return (
 		<CustomizationContext.Provider
 			value={{
+				packageType,
+				setPackageType,
 				umbrellaShape,
 				setUmbrellaShape,
 				fabricColor,

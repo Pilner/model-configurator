@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { useCustomization } from "../contexts/Customization";
 
-import { umbrellaShapes, fabricColors, steelColors } from "../data";
+import { packages, umbrellaShapes, fabricColors, steelColors } from "../data";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +11,8 @@ export default function Configurator() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const {
+		packageType,
+		setPackageType,
 		umbrellaShape,
 		setUmbrellaShape,
 		fabricColor,
@@ -29,6 +31,28 @@ export default function Configurator() {
 					>
 						<FontAwesomeIcon icon={faXmark} />
 					</button>
+					<div>
+						<div className="font-bold uppercase">Package Type</div>
+						<div className="flex items-center gap-[24px] mt-[24px] flex-wrap">
+							{packages.map((item, index) => (
+								<div
+									key={index}
+									className={`transition-opacity duration-500 flex flex-col gap-[8px] hover:opacity-[0.8] hover:cursor-pointer `}
+									onClick={() => setPackageType(item)}
+								>
+									<div
+										className={`text-[12px] text-[#acacac] transition-color duration-500 ${
+											packageType === item
+												? "text-white"
+												: ""
+										}`}
+									>
+										{item.name}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
 					<div>
 						<div className="font-bold uppercase">
 							Umbrella Shape

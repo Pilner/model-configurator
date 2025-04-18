@@ -13,7 +13,7 @@ export default function Experience() {
 			speed={1.5}
 			global
 			zoom={3}
-			polar={[0.1, Math.PI / 4, 0]}
+			// polar={[0.1, Math.PI / 4, 0]}
 		>
 			<Stage
 				environment={"city"}
