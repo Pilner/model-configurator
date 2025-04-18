@@ -1,3 +1,15 @@
+export const packages = [
+	{
+		name: "Package A",
+	},
+	{
+		name: "Package B",
+	},
+	{
+		name: "Package C",
+	},
+];
+
 export const umbrellaShapes = [
 	{
 		name: "Square",
