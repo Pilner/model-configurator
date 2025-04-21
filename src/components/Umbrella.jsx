@@ -251,7 +251,7 @@ export function Umbrella(props) {
 					{...plasticTextureProps}
 					color={"#DCF0EF"}
 					transparent
-					opacity={0.25}
+					opacity={0.35}
 				/>
 			</mesh>
 			<mesh
@@ -267,7 +267,7 @@ export function Umbrella(props) {
 					{...plasticTextureProps}
 					color={"#DCF0EF"}
 					transparent
-					opacity={0.25}
+					opacity={0.35}
 				/>
 			</mesh>
 			<mesh
@@ -284,7 +284,7 @@ export function Umbrella(props) {
 					{...plasticTextureProps}
 					color={"#DCF0EF"}
 					transparent
-					opacity={0.25}
+					opacity={0.35}
 				/>
 			</mesh>
 
